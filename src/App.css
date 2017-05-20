@@ -1,24 +1,58 @@
-.App {
-  text-align: center;
+.section {
+  max-width: 1024px;
+  margin: 0 auto;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+
+.list {
+  margin: 1em;
+  max-width: 1024px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.main {
+  margin: 1em;
 }
 
-.App-intro {
-  font-size: large;
+.field {
+  margin: 1em 0;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.field legend {
+  font-size: 1.125em;
+}
+
+.field input {
+  border: none;
+  color: black;
+  padding: .25em .5em;
+}
+
+.field address {
+  padding-left: 1em;
+}
+
+
+.appear {
+  opacity: 0;
+}
+.appearActive {
+  opacity: 1;
+  transition: opacity 1s;
+}
+.enter {
+  opacity: 0;
+}
+.enterActive {
+  opacity: 1;
+  transition: opacity 1s;
+}
+.leave {
+  opacity: 1;
+}
+.leaveActive {
+  opacity: 0;
+  transition: opacity 1s;
 }
