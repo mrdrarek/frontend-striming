@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
 const baseUrl = 'https://jsonplaceholder.typicode.com';
-const viviendas = 'http://www.urbenia.es/viviendas/getViviendasJSON';
+const viviendas = 'https://www.urbenia.es/viviendas/getViviendasJSON';
 const api = {
   post: {
     async getList(page = 1) {
