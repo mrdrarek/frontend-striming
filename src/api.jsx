@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
 const baseUrl = 'https://backend-drarek.herokuapp.com';
-const striminStatusPlaylist = 'http://strimin.ddns.net:8000/status-json.xsl';
+const striminStatusPlaylist = 'http://strimin-radio.ddns.net:8000/status-json.xsl';
 const api = {
   playlist: {
     async getAll() {

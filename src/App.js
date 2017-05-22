@@ -18,7 +18,7 @@ class App extends Component {
       playlistStatus: [],
       loading: true,
       toggleMenu: false,
-      audioDomain: 'http://strimin.ddns.net:8000/',
+      audioDomain: 'http://strimin-radio.ddns.net:8000/',
       audioSrc: 'BSO.ogg',
       imgBackground : 'http://www.gifff.in/img/background.gif?1.210952233901452',
     };
