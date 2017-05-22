@@ -15,6 +15,7 @@ class App extends Component {
     super(props);
     this.state = {
       playlists: [],
+      playlistStatus: [],
       loading: true,
       toggleMenu: false,
       audioDomain: 'http://strimin.ddns.net:8000/',
@@ -25,11 +26,13 @@ class App extends Component {
     this.handleScroll = this.handleScroll.bind(this);
     this.toggleSideBar = this.toggleSideBar.bind(this);
     this.randomImage = this.randomImage.bind(this);
+    this.reloadJsonStatus = this.reloadJsonStatus.bind(this);
   }
   async componentDidMount() {
     this.initialFetch();
     //window.addEventListener('scroll', this.handleScroll);
     var intervalId = setInterval(this.randomImage, 5000);
+    setInterval(this.reloadJsonStatus, 15000);
 
   }
   componentWillUmount() {
@@ -41,13 +44,23 @@ class App extends Component {
       imgBackground: `http://www.gifff.in/img/background.gif?1.${r}`,
     })
   }
+  async reloadJsonStatus(){
+    const playlistStatus = await api.playlist.getIcesPlaylist();
+    this.setState({
+      // posts,
+      loading: false,
+      playlistStatus,
+    });
+  }
   async initialFetch() {
     // const posts = await api.post.getList(this.state.page);
     const playlists = await api.playlist.getAll();
+    const playlistStatus = await api.playlist.getIcesPlaylist();
     this.setState({
       // posts,
       loading: false,
       playlists,
+      playlistStatus,
     });
   }
   handleScroll() {
@@ -111,7 +124,7 @@ class App extends Component {
               <img src={logo} />
             </li>
             {this.state.playlists
-            .map(playlist => <Playlist onClick={this.changeSong.bind(this,playlist)} id={playlist._id} key={playlist._id} {...playlist} />)
+            .map(playlist => <Playlist currentSong={this.state.playlistStatus.server.streams[`/${playlist.mount_name}`]} onClick={this.changeSong.bind(this,playlist)} id={playlist._id} key={playlist._id} {...playlist} />)
             }
           </ul>
         </div>

@@ -171,7 +171,7 @@ video::-webkit-media-controls-enclosure {
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
-    background: #000;
+    background: #a50707;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -206,10 +206,16 @@ video::-webkit-media-controls-enclosure {
 
 .sidebar-nav li {
     text-indent: 20px;
-    line-height: 40px;
+    margin : 10px;
     color:white;
+    cursor: pointer;
 }
+.sidebar-nav .title{
+      font-size: 12px;
+}
+.sidebar-nav .playlist{
 
+}
 .sidebar-nav li a {
     display: block;
     text-decoration: none;
