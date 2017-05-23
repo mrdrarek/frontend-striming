@@ -8,7 +8,7 @@ import logo from './logo.png';
 import styles from './App.css';
 
 import ReactAudioPlayer from 'react-audio-player';
-import ReactHowler from 'react-howler';
+
 
 
 class App extends Component {
