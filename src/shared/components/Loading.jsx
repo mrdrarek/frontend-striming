@@ -3,8 +3,8 @@ import styles from './Loading.css'
 
 function Loading() {
   return(
-    <div className={styles.overlay}>
-      <div className={styles.spinner}></div>
+    <div className="overlay">
+      <div className="spinner"></div>
     </div>
   );
 

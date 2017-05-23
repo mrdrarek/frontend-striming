@@ -8,6 +8,7 @@ import logo from './logo.png';
 import styles from './App.css';
 
 import ReactAudioPlayer from 'react-audio-player';
+import ReactHowler from 'react-howler';
 
 
 class App extends Component {
@@ -19,7 +20,7 @@ class App extends Component {
       loading: true,
       toggleMenu: false,
       audioDomain: 'http://strimin-radio.ddns.net:8000/',
-      audioSrc: 'BSO.ogg',
+      audioSrc: '',
       imgBackground : 'http://www.gifff.in/img/background.gif?1.210952233901452',
     };
 
@@ -27,6 +28,11 @@ class App extends Component {
     this.toggleSideBar = this.toggleSideBar.bind(this);
     this.randomImage = this.randomImage.bind(this);
     this.reloadJsonStatus = this.reloadJsonStatus.bind(this);
+    this.pauseSong = this.pauseSong.bind(this);
+    this.changeloading = this.changeloading.bind(this);
+    this.randomImage =this.randomImage.bind(this);
+    this.setInitialSong =this.setInitialSong.bind(this);
+
   }
   async componentDidMount() {
     this.initialFetch();
@@ -34,9 +40,27 @@ class App extends Component {
     var intervalId = setInterval(this.randomImage, 5000);
     setInterval(this.reloadJsonStatus, 15000);
 
+    clearInterval(this.timer)
+   this.timer = setInterval(this.changeloading, 5000)
+   this.timer = setInterval(this.setInitialSong, 3000)
+
+
   }
   componentWillUmount() {
     //window.removeEventListener('scroll', this.handleScroll);
+  }
+  setInitialSong(){
+    this.setState({
+      audioSrc: 'j.ogg',
+    })
+  }
+  changeloading(){
+    console.log("changeloading");
+    this.setState({
+      loading: false,
+    });
+
+    clearInterval(this.timer);
   }
   randomImage(){
     let r = Math.floor((Math.random() * 1000000000000000));
@@ -58,7 +82,7 @@ class App extends Component {
     const playlistStatus = await api.playlist.getIcesPlaylist();
     this.setState({
       // posts,
-      loading: false,
+
       playlists,
       playlistStatus,
     });
@@ -96,13 +120,26 @@ class App extends Component {
 
   }
   changeSong(playlist){
-
-    console.log(this.rap.audioEl);
-
+    let player =document.getElementsByClassName("react-audio-player");
     this.setState({
       audioSrc: playlist.mount_name,
     })
+    player[0].pause();
+    player[0].play();
+  }
+  pauseSong(){
+    let player =document.getElementsByClassName("react-audio-player");
+    this.setState({
+      audioSrc: '',
+    })
+    player[0].pause();
 
+  }
+  play(){
+    console.log("asd");
+  }
+  play2(){
+    console.log("play2");
   }
   /*
   <video className="video-container" id='video' autoPlay muted loop >
@@ -111,7 +148,11 @@ class App extends Component {
   */
   render() {
     return (
+
       <section name="Home" >
+      {this.state.loading && (
+        <Loading />
+      )}
       <div className="video-container">
 
           <img src={this.state.imgBackground}/>
@@ -121,7 +162,7 @@ class App extends Component {
         <div id="sidebar-wrapper">
           <ul className="sidebar-nav">
             <li className="sidebar-brand">
-              <img src={logo} />
+              <img src={logo} onClick={this.pauseSong} />
             </li>
             {this.state.playlists
             .map(playlist => <Playlist currentSong={this.state.playlistStatus.server.streams[`/${playlist.mount_name}`]} onClick={this.changeSong.bind(this,playlist)} id={playlist._id} key={playlist._id} {...playlist} />)
@@ -141,21 +182,20 @@ class App extends Component {
             </div>
         </div>
         </div>
-        <section className='list'>
-        {this.state.loading && (
-          <Loading />
-        )}
 
 
 
-        </section>
+
+
+
       </div>
 
       <ReactAudioPlayer
         src={`${this.state.audioDomain}${this.state.audioSrc}`}
         ref={(element) => { this.rap = element; }}
         autoPlay
-        controls
+        onCanPlay={this.play}
+        onPlay={this.play2}
       />
       </section>
     );

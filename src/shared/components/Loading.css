@@ -1,36 +1,66 @@
 .overlay{
   position: fixed;
-width: 100%;
-height: 100%;
+  width: 100%;
+  background-color: #1C1C1C;
+  height: 100%;
+  z-index: 1000;
+  animation-name: adios;
+  animation-duration: 3s;
+  animation-delay: 3s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-timing-function: cubic-bezier(1,-0.99,0,2.01);
 }
 .spinner {
-  width: 40px;
-  height: 40px;
-  background-color: #333;
+  width: 200px;
+  height: 200px;
+  background-image: url('../../loading.png');
 
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 100px auto;
-  -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
-  animation: sk-rotateplane 1.2s infinite ease-in-out;
-
+  animation: rotacion,pirate;
+  animation-delay: 0s,4s;
+  animation-duration: 1s,1s;
+  animation-iteration-count: 3,1;
+  animation-direction: alternate-reverse,normal;
+  animation-timing-function: cubic-bezier(1,-0.99,0,2.01),ease;
   position: relative;
   top: 100px;
+  color: white;
+  will-change: transform;
+  transform: scale(0.4);
 }
-
-@-webkit-keyframes sk-rotateplane {
-  0% { -webkit-transform: perspective(120px) }
-  50% { -webkit-transform: perspective(120px) rotateY(180deg) }
-  100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+@keyframes adios {
+  from{margin-left:0px; opacity: 1;}
+  to{margin-left: -2000px; opacity: 0.5; }
 }
+@keyframes rotacion {
+  from{
+    transform: rotateZ(0deg) scale(0.4);
+  }
+  to{
+    transform: rotateZ(180deg) scale(1);
 
+  }
+}
+@keyframes pirate {
+  from{left: 0px}
+  to{left:1000px;opacity: 0;}
+}
+@keyframes boom {
+  to{
+    transform: scale(7);
+  }
+}
 @keyframes sk-rotateplane {
   0% {
     transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
   } 50% {
     transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
-    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
   } 100% {
     transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
   }
 }
